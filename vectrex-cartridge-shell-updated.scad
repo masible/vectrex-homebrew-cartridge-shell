@@ -23,7 +23,7 @@ module vectrex_small_peg_fix(top_peg_d) {
 module shell_no_pegs() {
     difference() {
         color("Gold")
-        import("original/vectrex_cartridge_bottom.stl");
+        import("original/vectrex_cartridge_bottom.stl", convexity=10);
 
         translate([-24, 12, 2])
         cube([8, 8, 12]);
