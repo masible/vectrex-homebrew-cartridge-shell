@@ -1,5 +1,6 @@
 $fn = 100;
 
+// Single small side peg
 module vectrex_small_peg_fix(top_peg_d) {
     union() {
         color("Red")
@@ -7,7 +8,7 @@ module vectrex_small_peg_fix(top_peg_d) {
         cylinder(h = 9, d = 6.0);
 
         color("Green")
-        translate([-20, 16, 11])
+        translate([-19.8, 16, 11])
         cylinder(h = 2, d = top_peg_d);
 
         color("Blue")
@@ -20,6 +21,7 @@ module vectrex_small_peg_fix(top_peg_d) {
     }
 }
 
+// Remove the small pegs
 module shell_no_pegs() {
     difference() {
         color("Gold")
@@ -33,9 +35,31 @@ module shell_no_pegs() {
     }
 }
 
-module shell_no_top_bracket() {
+// Remove the smaller pegs and the top of the bigger one
+module shell_middle_peg() {
     difference() {
         shell_no_pegs();
+        
+        color("Brown")
+        translate([-6, 12, 11])
+        cube([12, 8, 2.01]);
+    }
+}
+
+// Remove the top bracket for longer PCBs
+module shell_no_top_bracket() {
+    difference() {
+        union() {
+            shell_middle_peg();
+            
+            difference() {
+                translate([0, 16, 11])
+                cylinder(h = 2, d = 5);
+
+                translate([0, 16, -1])
+                cylinder(h = 15, d = 2);
+            }
+        }
         
         translate([8.6, -30, 11])
         cube([9, 18.1, 6.1]);
@@ -51,7 +75,7 @@ module shell_wireout_variant() {
         
         vectrex_small_peg_fix(3.7);
         
-        translate([40, 0, 0])
+        translate([40-0.4, 0, 0])
         vectrex_small_peg_fix(3.7);
     }
 }
@@ -60,10 +84,10 @@ module shell_test_cart_variant() {
     union () {
         shell_no_pegs();
         
-        vectrex_small_peg_fix(3.9);
+        vectrex_small_peg_fix(3.7);
         
-        translate([40, 0, 0])
-        vectrex_small_peg_fix(3.9);
+        translate([40-0.4, 0, 0])
+        vectrex_small_peg_fix(3.7);
     }
 }
 
