@@ -1,22 +1,22 @@
 $fn = 100;
 
+diameter_center_peg_top = 5.4;
+
 // Single small side peg
 module vectrex_small_peg_fix(top_peg_d) {
     union() {
         color("Red")
-        translate([-20, 16, 2])
         cylinder(h = 9, d = 6.0);
 
         color("Green")
-        translate([-19.8, 16, 11])
+        translate([0, 0, 9])
         cylinder(h = 2, d = top_peg_d);
 
         color("Blue")
-        translate([-20, 16, 2])
         cylinder(h = 3, d1 = 8, d2 = 4);
     
         color("Purple")
-        translate([-21.5, 16, 2])
+        translate([-1.5, 0, 0])
         cube([3, 5.5, 9]);
     }
 }
@@ -47,14 +47,14 @@ module shell_middle_peg() {
 }
 
 // Remove the top bracket for longer PCBs
-module shell_no_top_bracket() {
+module shell_no_top_bracket(top_peg_d) {
     difference() {
         union() {
             shell_middle_peg();
             
             difference() {
                 translate([0, 16, 11])
-                cylinder(h = 2, d = 5);
+                cylinder(h = 2, d = top_peg_d);
 
                 translate([0, 16, -1])
                 cylinder(h = 15, d = 2);
@@ -71,11 +71,12 @@ module shell_no_top_bracket() {
 
 module shell_wireout_variant() {
     union () {
-        shell_no_top_bracket();
-        
+        shell_no_top_bracket(5.1);
+
+        translate([-(15.96 + 3.85/2 + 5.1/2), 16, 2])
         vectrex_small_peg_fix(3.7);
         
-        translate([40-0.4, 0, 0])
+        translate([15.96 + 3.85/2 + 5.1/2, 16, 2])
         vectrex_small_peg_fix(3.7);
     }
 }
@@ -83,11 +84,18 @@ module shell_wireout_variant() {
 module shell_test_cart_variant() {
     union () {
         shell_no_pegs();
+
+        diameter_side_hole = 3.95;
+        diameter_side_peg = 3.9;
+
+        // Right
+        translate([-(14.85 + diameter_side_hole/2 + diameter_center_peg_top/2), 16, 2])
+        vectrex_small_peg_fix(diameter_side_peg);
         
-        vectrex_small_peg_fix(3.7);
-        
-        translate([40-0.4, 0, 0])
-        vectrex_small_peg_fix(3.7);
+        //Left
+        //edge to edge 15.2,
+        translate([15.2 + diameter_side_hole/2 + diameter_center_peg_top/2, 16, 2])
+        vectrex_small_peg_fix(diameter_side_peg);
     }
 }
 
