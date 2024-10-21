@@ -1,13 +1,12 @@
-# Vectrex Cartridge Shell (updated)
+# Vectrex Homebrew Cartridge Shell
 
 Remix of [Vectrex Cartridge Case](https://www.printables.com/model/125566-vectrex-cartridge-case)
-modified to better accommodate certain cartridge PCBs.
+modified to better accommodate RetroElectronik homebrew cartridge PCBs
+and WireOut-RE.
 
 The original version of the bottom shell did not fit my copy of
 [Wireout-RE](http://www.futurevector.eu/Wireout-re.html) at all (PCB too long,
 and pegs too big), or the r2tronik test cartridge.
-
-The top shell is unmodified.
 
 ## License
 
