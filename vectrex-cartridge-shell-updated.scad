@@ -82,7 +82,7 @@ module shell_wireout_variant() {
     }
 }
 
-module shell_test_cart_variant() {
+module shell_retroelectronik_variant() {
     union () {
         shell_no_pegs();
 
@@ -118,6 +118,6 @@ module shell_top_wireout_variant() {
 //shell_no_top_bracket();
 
 //shell_wireout_variant();
-//shell_test_cart_variant();
+//shell_retroelectronik_variant();
 
 shell_top_wireout_variant();
