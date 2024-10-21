@@ -111,6 +111,11 @@ module shell_top_wireout_variant() {
     }
 }
 
+module shell_top_retroelectronik_variant() {
+    color("Gold")
+    import("original/vectrex_cartdridge_top.stl", convexity=10);
+}
+
 //vectrex_small_peg_fix(3.75);
 //vectrex_small_peg_fix(4);
 //vectrex_small_peg_fix(3.6);
@@ -121,3 +126,4 @@ module shell_top_wireout_variant() {
 //shell_retroelectronik_variant();
 
 shell_top_wireout_variant();
+shell_top_retroelectronik_variant();
