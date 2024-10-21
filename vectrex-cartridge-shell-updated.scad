@@ -103,7 +103,7 @@ module shell_retroelectronik_variant() {
 module shell_top_wireout_variant() {
     union() {
         color("Gold")
-        import("vectrex_cartdridge_top.stl", convexity=10);
+        import("original/vectrex_cartdridge_top.stl", convexity=10);
 
         diameter_peg = 3.3;
         translate([0, 16 - diameter_peg - 1.5 - 25.6, 0])
