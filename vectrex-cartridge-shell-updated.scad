@@ -3,7 +3,7 @@ $fn = 100;
 diameter_center_peg_top = 5.4;
 
 // Single small side peg
-module vectrex_small_peg_fix(top_peg_d) {
+module vectrex_small_peg_fix(top_peg_d, with_support) {
     union() {
         color("Red")
         cylinder(h = 9, d = 6.0);
@@ -14,10 +14,11 @@ module vectrex_small_peg_fix(top_peg_d) {
 
         color("Blue")
         cylinder(h = 3, d1 = 8, d2 = 4);
-    
-        color("Purple")
-        translate([-1.5, 0, 0])
-        cube([3, 5.5, 9]);
+        if (with_support != 0) {
+            color("Purple")
+            translate([-1.5, 0, 0])
+            cube([3, 5.5, 9]);
+        }
     }
 }
 
@@ -74,10 +75,10 @@ module shell_wireout_variant() {
         shell_no_top_bracket(5.1);
 
         translate([-(15.96 + 3.85/2 + 5.1/2), 16, 2])
-        vectrex_small_peg_fix(3.7);
+        vectrex_small_peg_fix(3.7, 1);
         
         translate([15.96 + 3.85/2 + 5.1/2, 16, 2])
-        vectrex_small_peg_fix(3.7);
+        vectrex_small_peg_fix(3.7, 1);
     }
 }
 
@@ -90,12 +91,23 @@ module shell_test_cart_variant() {
 
         // Right
         translate([-(14.85 + diameter_side_hole/2 + diameter_center_peg_top/2), 16, 2])
-        vectrex_small_peg_fix(diameter_side_peg);
+        vectrex_small_peg_fix(diameter_side_peg, 1);
         
         //Left
         //edge to edge 15.2,
         translate([15.2 + diameter_side_hole/2 + diameter_center_peg_top/2, 16, 2])
-        vectrex_small_peg_fix(diameter_side_peg);
+        vectrex_small_peg_fix(diameter_side_peg, 1);
+    }
+}
+
+module shell_top_wireout_variant() {
+    union() {
+        color("Gold")
+        import("vectrex_cartdridge_top.stl", convexity=10);
+
+        diameter_peg = 3.3;
+        translate([0, 16 - diameter_peg - 1.5 - 25.6, 0])
+        vectrex_small_peg_fix(diameter_peg, 0);
     }
 }
 
@@ -105,5 +117,7 @@ module shell_test_cart_variant() {
 //shell_no_pegs();
 //shell_no_top_bracket();
 
-shell_wireout_variant();
+//shell_wireout_variant();
 //shell_test_cart_variant();
+
+shell_top_wireout_variant();
